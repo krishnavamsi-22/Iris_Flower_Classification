@@ -29,4 +29,4 @@ The model performed well with (Insert Accuracy Here)% accuracy on the test set.
 ## Usage
 1. Clone the repository.
 2. Install required dependencies (`pip install -r requirements.txt`).
-3. Run the script: `python src/main.py`.
+3. Run the script: `python iris_classification.py`.
