@@ -1,4 +1,4 @@
-```markdown
+
 # SidebarActivities Component
 
 ## Overview
@@ -56,7 +56,7 @@ interface AppState {
     activityOrder: number[];
   };
 }
-```
+
 
 ### State Flow Table
 
