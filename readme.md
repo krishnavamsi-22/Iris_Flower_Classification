@@ -1,57 +1,85 @@
 # SidebarActivities Component
 
 ## Overview
-
-The `SidebarActivities` component is a React functional component designed to provide an interactive sidebar for navigating through activities within a course chapter. It utilizes Redux for state management and supports user interactions like activity selection and navigation.
-
----
-
-## Workflow
-
-### Component Initialization
-
-1. **Fetch Route Parameters**:
-   - Extract `courseId` using `useParams` to determine the course context.
-2. **Retrieve Redux State**:
-   - Access state using `useAppSelector`:
-     - `activityOrder`: Sequence of activities.
-     - `currentActivityId`: Currently selected activity.
-     - `activityStates`: Status of activities (e.g., completed/in-progress).
-3. **Render Activities**:
-   - Map over `activityOrder` to display:
-     - **Icon**: Represents activity type (e.g., video, quiz).
-     - **Title**: Name of the activity.
-     - **Status Indicator**: Shows completion or progress.
+The SidebarActivities component is a React functional component used in course chapters to display and navigate through activities. It provides an intuitive UI to help users explore and manage activities with visual indicators and seamless navigation.
 
 ---
 
-### User Interactions
+## Features
+| *Feature*              | *Description*                                                                 |
+|---------------------------|---------------------------------------------------------------------------------|
+| *Dynamic Rendering*     | Fetches and displays activities dynamically based on the current course and chapter. |
+| *Activity Icons*        | Uses icons to represent activity types like videos, quizzes, and reading materials. |
+| *Navigation*            | Includes a back button to navigate to the chapter list and links to activity details. |
+| *State Management*      | Utilizes Redux for global state management.                                      |
+| *Loading State*         | Displays a loading spinner while fetching activity data.                        |
 
-1. **Activity Selection**:
-   - Clicking an activity triggers `handleActivityClick`:
-     - Updates Redux state with `setCurrentActivity(activityId)`.
-     - Navigates to the activity details page.
-2. **Back Button**:
-   - Clicking the back button triggers `handleBackbutton`:
-     - Resets sidebar view using `setSidebar("global")`.
-     - Navigates back to the chapters list.
+---
+
+## Dependencies
+| *Hook/Library*    | *Purpose*                                                                                  |
+|----------------------|----------------------------------------------------------------------------------------------|
+| useNavigate        | Navigate programmatically between routes.                                                   |
+| useParams          | Retrieve route parameters like courseId.                                                  |
+| useAppDispatch     | Dispatch actions to the Redux store.                                                        |
+| useAppSelector     | Select state slices from the Redux store.                                                   |
+| react-icons        | Display icons for activity types and statuses.                                              |
+| Redux Slices         | session for activity-related data and global for UI state like sidebars.                |
+
+---
+
+## Workflow and Data Flow
+
+### Fetching Data
+1. Extract courseId from route parameters.
+2. Use Redux selectors to fetch:
+   - currentActivityId: Currently selected activity.
+   - activityStates: State of all activities including type, title, and status.
+   - activityOrder: Order in which activities are displayed.
+
+### User Interaction
+| *Action*              | *Handler Function*         | *Effect*                                                                 |
+|--------------------------|------------------------------|-----------------------------------------------------------------------------|
+| Click on Activity        | handleActivityClick        | Updates Redux with the selected activity and highlights it in the list.    |
+| Click Back Button        | handleBackbutton           | Navigates to the chapter list and resets the sidebar to its global state.  |
+
+### Rendering Activities
+- Maps through activityOrder to dynamically generate a list of activities.
+- Each activity displays:
+  - *Icon*: Based on activity_type.
+  - *Title and Description*: Conditionally displayed for clarity.
+  - *Duration*: Indicates estimated time to complete.
 
 ---
 
 ## State Management
 
-### Redux State Structure
+### Redux State Updates
+| *Action*                   | *State Slice*      | *Effect*                                                                 |
+|-------------------------------|----------------------|-----------------------------------------------------------------------------|
+| setCurrentActivity(activityId) | session           | Updates the current activity ID.                                           |
+| setSidebar("global")        | global             | Resets the sidebar state to the global view.                               |
 
-```typescript
-interface AppState {
-  session: {
-    currentActivityId: number;
-    activityStates: {
-      [key: number]: {
-        activity: ActivityType;
-        attempt: AttemptType;
-      };
-    };
-    activityOrder: number[];
-  };
-}
+### Local State
+- *Loading State*: Manages the display of the spinner while data is fetched.
+
+---
+
+## Component Lifecycle
+### useEffect Hook
+| *Purpose*          | *Effect*                                                                                  |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| Fetch initial data    | Ensures the component fetches required activity data upon mounting.                        |
+| Manage navigation     | Sets up sidebar and breadcrumb context for seamless navigation.                           |
+
+---
+
+## Mermaid Diagram
+```mermaid
+graph TD
+    A[User Opens SidebarActivities] -->|Fetch Data| B[Fetch Session Data via Redux]
+    B -->|Data Loaded| C[Render Activity List]
+    C -->|Click on Activity| D[Update Redux State with Selected Activity]
+    D -->|Navigate| E[Display Activity Details]
+    C -->|Click Back| F[Navigate to Chapters]
+    F --> G[Reset Sidebar State]
