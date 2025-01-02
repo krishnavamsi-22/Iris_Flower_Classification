@@ -48,7 +48,8 @@ graph TD
     E --> J{Back Button Clicked?}
     J -->|Yes| K[Navigate to Chapters and Dispatch setSidebar]
     J -->|No| L[Stay on Current View]
----
+
+
 
 ## Workflow and Data Flow
 
