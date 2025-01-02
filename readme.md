@@ -3,7 +3,7 @@
 ## Overview
 The SidebarActivities component is a React functional component used in course chapters to display and navigate through activities. It provides an intuitive UI to help users explore and manage activities with visual indicators and seamless navigation.
 
---
+
 
 ## Features
 | *Feature*              | *Description*                                                                 |
