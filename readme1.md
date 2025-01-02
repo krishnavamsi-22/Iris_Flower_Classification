@@ -48,8 +48,7 @@ graph TD
     E --> J{Back Button Clicked?}
     J -->|Yes| K[Navigate to Chapters and Dispatch setSidebar]
     J -->|No| L[Stay on Current View]
-
-
+```
 
 ## Workflow and Data Flow
 
@@ -76,4 +75,3 @@ sequenceDiagram
     User->>Component: Click Back Button
     Component->>ReduxStore: Dispatch setSidebar("global")
     Component-->>User: Navigate to Chapters
-
