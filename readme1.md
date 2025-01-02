@@ -31,10 +31,7 @@ The `SidebarActivities` component is a React functional component used to displa
 
 ---
 
-
-# SidebarActivities Component
-
-## Workflow and Data Flow
+## Component Lifecycle
 
 ### Flowchart: Rendering Activities
 
@@ -51,7 +48,7 @@ graph TD
     E --> J{Back Button Clicked?}
     J -->|Yes| K[Navigate to Chapters and Dispatch setSidebar]
     J -->|No| L[Stay on Current View]
-
+---
 
 ## Workflow and Data Flow
 
