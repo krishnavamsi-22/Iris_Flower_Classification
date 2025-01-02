@@ -92,7 +92,7 @@ graph TD
 
 ### Sequence Diagram: Component Workflow
 
-```mermaid
+
 sequenceDiagram
     participant User
     participant Component
