@@ -50,7 +50,22 @@ graph TD
     J -->|No| L[Stay on Current View]
 ```
 
-## Workflow and Data Flow
+---
+
+### Component States and Effects
+
+- **States**:
+  - `currentActivityId`: Tracks the currently active activity.
+  - `activityStates`: Represents the completion or progress state of each activity.
+  - `activityOrder`: Determines the sequence in which activities are displayed.
+
+- **Effects**:
+  - `useEffect`: Fetches activity data whenever the `courseId` or state dependencies change.
+  - `useEffect`: Updates the Redux state when the user interacts with the component, such as clicking an activity or the back button.
+
+These states and effects are crucial for maintaining the component's reactivity and ensuring that the UI is always synchronized with the data.
+
+---
 
 ### Sequence Diagram: Component Workflow
 
@@ -75,3 +90,4 @@ sequenceDiagram
     User->>Component: Click Back Button
     Component->>ReduxStore: Dispatch setSidebar("global")
     Component-->>User: Navigate to Chapters
+```
