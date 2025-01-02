@@ -46,7 +46,7 @@ sequenceDiagram
     ReduxStore-->>Component: Update currentActivityId
     Component-->>User: Highlight Selected Activity
 
-
+```mermaid
 graph TD
     A[Component Mounts] --> B[Fetch Route Params]
     B --> C[Retrieve Redux State]
