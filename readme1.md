@@ -47,6 +47,12 @@ sequenceDiagram
     Component-->>User: Highlight Selected Activity
 ---
 
+# SidebarActivities Component
+
+## Workflow and Data Flow
+
+### Flowchart: Rendering Activities
+
 ```mermaid
 graph TD
     A[Component Mounts] --> B[Fetch Route Params]
