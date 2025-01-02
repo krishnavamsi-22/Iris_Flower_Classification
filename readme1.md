@@ -47,6 +47,20 @@ sequenceDiagram
     Component-->>User: Highlight Selected Activity
 
 
+graph TD
+    A[Component Mounts] --> B[Fetch Route Params]
+    B --> C[Retrieve Redux State]
+    C --> D{Status Check}
+    D -->|Success| E[Render Activity List]
+    D -->|Not Success| F[Display Loading Spinner]
+    E --> G{Activity Clicked?}
+    G -->|Yes| H[Dispatch setCurrentActivity]
+    G -->|No| I[Wait for Interaction]
+    E --> J{Back Button Clicked?}
+    J -->|Yes| K[Navigate to Chapters and Dispatch setSidebar]
+    J -->|No| L[Stay on Current View]
+
+
 ## Workflow and Data Flow
 
 ### Sequence Diagram: Component Workflow
