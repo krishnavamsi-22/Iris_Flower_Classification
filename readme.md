@@ -77,9 +77,12 @@ The SidebarActivities component is a React functional component used in course c
 ## Mermaid Diagram
 ```mermaid
 graph TD
-    A[User Opens SidebarActivities] -->|Fetch Data| B[Fetch Session Data via Redux]
-    B -->|Data Loaded| C[Render Activity List]
-    C -->|Click on Activity| D[Update Redux State with Selected Activity]
-    D -->|Navigate| E[Display Activity Details]
-    C -->|Click Back| F[Navigate to Chapters]
-    F --> G[Reset Sidebar State]
+    A[Component Mounts] --> B[Fetch Route Params]
+    B --> C[Retrieve Redux State]
+    C --> D[Render Activity List]
+    D -->|User Clicks Activity| E[Invoke handleActivityClick]
+    E --> F[Update Redux State]
+    F --> G[Navigate to Activity Details]
+    D -->|User Clicks Back| H[Invoke handleBackbutton]
+    H --> I[Reset Sidebar State]
+    I --> J[Navigate to Chapters]
