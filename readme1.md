@@ -1,84 +1,101 @@
 # SidebarActivities Component
 
 ## Overview
-
-The SidebarActivities component is a React functional component that provides an interactive sidebar for navigating through activities within a course chapter. It integrates with Redux for state management and handles user interactions like selecting and navigating activities.
-
-
-
-## Explanation of Workflow
-
-### Initialization
-
-1. *Fetch Route Parameters*:
-   - The courseId is extracted from the URL using the useParams hook.
-   - This parameter determines the current course context for fetching activities.
-
-2. *Retrieve Redux State*:
-   - The component uses useAppSelector to fetch data from Redux:
-     - activityOrder: An array determining the sequence of activities.
-     - currentActivityId: The ID of the currently selected activity.
-     - activityStates: Information about the status (e.g., completed/in-progress) of each activity.
-
-3. *Render Activities*:
-   - Maps over activityOrder to dynamically render the list of activities:
-     - Each activity is displayed with:
-       - *Icon*: Represents activity type (e.g., video, quiz).
-       - *Title*: Name of the activity.
-       - *Status Indicator*: Shows if the activity is completed or in progress.
+The `SidebarActivities` component is a React functional component used in course chapters to display and navigate through activities. It dynamically renders activity information, provides intuitive navigation, and visually represents activity types and statuses.
 
 ---
 
-### User Interactions
+## Features
 
-1. *Activity Selection*:
-   - Clicking an activity triggers handleActivityClick:
-     - Updates the currentActivity in the Redux session slice using setCurrentActivity(activityId).
-     - Navigates to the activity details page using useNavigate.
-
-2. *Back Button*:
-   - Clicking the back button triggers handleBackbutton:
-     - Resets the sidebar state to the global view using setSidebar("global").
-     - Navigates back to the chapters list using useNavigate.
+| **Feature**             | **Description**                                                                |
+|--------------------------|--------------------------------------------------------------------------------|
+| **Dynamic Rendering**    | Fetches and displays activities dynamically based on the current course/chapter. |
+| **Activity Icons**       | Icons represent activity types like videos, quizzes, and reading materials.    |
+| **Navigation**           | Includes a back button to navigate to the chapter list and links to activities.|
+| **State Management**     | Utilizes Redux for global and session-specific state management.               |
+| **Loading State**        | Displays a loading spinner while fetching activity data.                       |
 
 ---
 
-### State Management
+## Dependencies
 
-| *State Type*       | *Managed By* | *Purpose*                                                                 |
-|-----------------------|----------------|-----------------------------------------------------------------------------|
-| *Global State*      | Redux          | Stores activity data (activityOrder, currentActivityId, activityStates). |
-| *Local State*       | Component      | Controls UI elements like loading indicators and active item styles.         |
-
-#### Redux Slice Updates
-
-| *Action*                   | *Redux Slice*    | *Effect*                                                                 |
-|-------------------------------|--------------------|-----------------------------------------------------------------------------|
-| setCurrentActivity(activityId) | session         | Updates the selected activity ID in Redux.                                |
-| setSidebar("global")        | global           | Resets the sidebar view to the global state.                              |
+| **Hook/Library** | **Purpose**                                                                          |
+|-------------------|--------------------------------------------------------------------------------------|
+| `useNavigate`     | Navigate programmatically between routes.                                           |
+| `useParams`       | Retrieve route parameters like `courseId`.                                          |
+| `useAppDispatch`  | Dispatch actions to the Redux store.                                                |
+| `useAppSelector`  | Select state slices from the Redux store.                                           |
+| `react-icons`     | Display icons for activity types and statuses.                                      |
+| `Redux Slices`    | Manage session-specific activity data and global UI states.                        |
+| `Loading`         | Custom component to indicate loading states.                                        |
 
 ---
 
-### Activity Rendering
+## Workflow and Data Flow
 
-- Each activity is rendered with:
-  - *Icon*: Represents the type of the activity (e.g., video, quiz).
-  - *Title*: Name of the activity.
-  - *Completion Status*: Indicates whether the activity is completed or in progress.
+### Fetching Data
 
-### Navigation Logic
-
-1. When an activity is clicked:
-   - The selected activity ID is updated in Redux.
-   - The user is navigated to the activity details page.
-
-2. When the back button is clicked:
-   - The sidebar state is reset to the global view.
-   - The user is navigated back to the chapter list.
+1. Extracts `courseId` from route parameters using `useParams`.
+2. Fetches activity-related data from the Redux store:
+   - `currentActivityId`: The currently selected activity.
+   - `activityStates`: Contains data about each activity (e.g., type, title, status).
+   - `activityOrder`: Order in which activities are displayed.
 
 ---
 
-## Component Flowchart
+### User Interaction
+
+| **Action**            | **Handler Function**     | **Effect**                                                                      |
+|------------------------|--------------------------|---------------------------------------------------------------------------------|
+| Click on Activity      | `handleActivityClick`    | Updates the Redux state with the selected activity and highlights it.           |
+| Click Back Button      | `handleBackbutton`       | Navigates to the chapter list and resets the sidebar to its global state.       |
+
+---
+
+### Rendering Activities
+
+- Maps through `activityOrder` to dynamically generate a list of activities.
+- Each activity includes:
+  - **Icon**: Based on `activity_type`.
+  - **Title and Description**: Rendered based on activity type.
+  - **Duration**: Indicates estimated time to complete.
+- Highlights the currently selected activity.
+
+---
+
+## State Management
+
+### Redux State Updates
+
+| **Action**                     | **State Slice**    | **Effect**                                                                 |
+|---------------------------------|--------------------|-----------------------------------------------------------------------------|
+| `setCurrentActivity(activityId)`| `session`          | Updates the current activity ID.                                           |
+| `setSidebar("global")`          | `global`           | Resets the sidebar state to the global view.                               |
+
+---
+
+### Local State
+
+| **State**        | **Purpose**                                    |
+|-------------------|------------------------------------------------|
+| `Loading State`   | Controls the display of a spinner during data fetch. |
+
+---
+
+## Component Lifecycle
+
+### useEffect Hook
+
+| **Purpose**               | **Effect**                                                                  |
+|----------------------------|-----------------------------------------------------------------------------|
+| Fetch initial data         | Ensures required activity data is fetched when the component mounts.        |
+| Manage navigation context  | Sets up sidebar and breadcrumb navigation for seamless transitions.         |
+
+---
+
+## Mermaid Diagram
+
+### Workflow
 
 ```mermaid
 graph TD
