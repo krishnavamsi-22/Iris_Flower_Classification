@@ -86,3 +86,31 @@ graph TD
     D -->|User Clicks Back| H[Invoke handleBackbutton]
     H --> I[Reset Sidebar State]
     I --> J[Navigate to Chapters]
+
+
+## Workflow and Data Flow
+
+### Sequence Diagram: Component Workflow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Component
+    participant ReduxStore
+    participant Backend
+
+    User->>Component: Load SidebarActivities
+    Component->>ReduxStore: Fetch currentActivityId, activityStates, activityOrder
+    ReduxStore-->>Component: Provide required activity data
+    Component->>Backend: Fetch course-related data (if required)
+    Backend-->>Component: Return course data
+    Component-->>User: Render activity list and UI
+
+    User->>Component: Click on an Activity
+    Component->>ReduxStore: Dispatch setCurrentActivity(action)
+    ReduxStore-->>Component: Update currentActivityId
+
+    User->>Component: Click Back Button
+    Component->>ReduxStore: Dispatch setSidebar("global")
+    Component-->>User: Navigate to Chapters
+
