@@ -5,7 +5,7 @@
 
 The `SidebarActivities` component is a React functional component designed to provide an interactive sidebar for navigating through activities within a course chapter. It utilizes Redux for state management and supports user interactions like activity selection and navigation.
 
----
+
 
 ## Workflow
 
@@ -24,7 +24,7 @@ The `SidebarActivities` component is a React functional component designed to pr
      - **Title**: Name of the activity.
      - **Status Indicator**: Shows completion or progress.
 
----
+
 
 ### User Interactions
 
@@ -37,7 +37,7 @@ The `SidebarActivities` component is a React functional component designed to pr
      - Resets sidebar view using `setSidebar("global")`.
      - Navigates back to the chapters list.
 
----
+
 
 ## State Management
 
@@ -74,7 +74,7 @@ interface AppState {
 | `setCurrentActivity(activityId)` | `session`         | Updates the selected activity in state.  |
 | `setSidebar("global")`        | `global`           | Resets the sidebar to the global view.   |
 
----
+
 
 ## Activity Rendering
 
@@ -85,20 +85,18 @@ interface AppState {
 
 ### Activity Icon Logic
 
-```mermaid
+
 graph TD
     A[Activity Type Input] --> B{Switch Statement}
     B -->|Written Answer| C[MdSlowMotionVideo]
     B -->|Study Material| D[IoBookOutline]
     B -->|Multiple Choice| E[FiEdit]
     B -->|Default| F[FiEdit]
-```
 
----
+
 
 ## Component Flowchart
 
-```mermaid
 graph TD
     A[Component Mounts] --> B[Fetch Route Params]
     B --> C[Retrieve Redux State]
@@ -109,9 +107,7 @@ graph TD
     D -->|User Clicks Back| H[Invoke handleBackbutton]
     H --> I[Reset Sidebar State]
     I --> J[Navigate to Chapters]
-```
 
----
 
 ## Component Lifecycle Events
 
@@ -122,11 +118,10 @@ graph TD
 | Interaction    | Handle clicks, update state             | Dispatch, `navigate`     |
 | Unmount        | Clean up subscriptions                  | None                     |
 
----
+
 
 ## Sequence Diagram for User Interactions
 
-```mermaid
 sequenceDiagram
     participant User as User
     participant Component as SidebarActivities
@@ -139,13 +134,12 @@ sequenceDiagram
     Component->>Router: Navigate to Details
     Component->>UI: Re-render UI
     UI-->>User: Show Updated State
-```
 
 ---
 
 ## Data Transformation Pipeline
 
-```mermaid
+
 flowchart LR
     A[Raw Activity Data] -->|Redux Selection| B[Filtered Data]
     B -->|Processing| C[UI Ready Data]
@@ -154,9 +148,7 @@ flowchart LR
         C -->|Map Function| D[Activity Items]
         D -->|Icon Selection| E[Final UI Elements]
     end
-```
 
----
 
 ## Improvements and Optimizations
 
@@ -166,4 +158,3 @@ flowchart LR
 | Conditional Rendering   | Loading check           | Prevent unnecessary renders.          |
 | Memoization             | Icon computation        | Optimize rendering performance.       |
 | Key Prop Usage          | List rendering          | Efficient DOM updates.                |
-```
