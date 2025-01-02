@@ -45,6 +45,7 @@ sequenceDiagram
     Component->>ReduxStore: Dispatch setCurrentActivity(action)
     ReduxStore-->>Component: Update currentActivityId
     Component-->>User: Highlight Selected Activity
+---
 
 ```mermaid
 graph TD
