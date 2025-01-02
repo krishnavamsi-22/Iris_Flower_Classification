@@ -31,6 +31,20 @@ The `SidebarActivities` component is a React functional component used to displa
 
 ---
 
+Component Lifecycle
+Sequence Diagram: Activity Selection Flow
+mermaid
+Copy code
+sequenceDiagram
+    participant User
+    participant Component
+    participant ReduxStore
+
+    User->>Component: Click on an Activity
+    Component->>ReduxStore: Dispatch setCurrentActivity(action)
+    ReduxStore-->>Component: Update currentActivityId
+    Component-->>User: Highlight Selected Activity
+
 ## Workflow and Data Flow
 
 ### Sequence Diagram: Component Workflow
