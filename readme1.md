@@ -4,7 +4,7 @@
 
 The SidebarActivities component is a React functional component that provides an interactive sidebar for navigating through activities within a course chapter. It integrates with Redux for state management and handles user interactions like selecting and navigating activities.
 
----
+
 
 ## Explanation of Workflow
 
