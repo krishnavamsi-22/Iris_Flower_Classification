@@ -36,6 +36,7 @@ Sequence Diagram: Activity Selection Flow
 mermaid
 Copy code
 sequenceDiagram
+sequenceDiagram
     participant User
     participant Component
     participant ReduxStore
@@ -44,6 +45,7 @@ sequenceDiagram
     Component->>ReduxStore: Dispatch setCurrentActivity(action)
     ReduxStore-->>Component: Update currentActivityId
     Component-->>User: Highlight Selected Activity
+
 
 ## Workflow and Data Flow
 
